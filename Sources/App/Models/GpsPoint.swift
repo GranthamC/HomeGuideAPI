@@ -24,9 +24,11 @@ final class GpsPoint: Codable
 	
 	var venueModelID: VenueModel.ID?
 	
-	var isRoutePoint: Bool
-	var isModelLocation: Bool
-	var isVenueLocation: Bool
+	var pointType: Int32
+	
+	var isRoutePoint: Bool = false
+	var isModelLocation: Bool = false
+	var isVenueLocation: Bool = false
 	
 	var latitude: Double		// Positive values indicate latitudes north of the equator. Negative values south
 	
@@ -36,29 +38,29 @@ final class GpsPoint: Codable
 	var timeStamp: TimeInterval
 	
 	var horizontalAccuracy: Double?
+	
+	var changeToken: Int32?
 
 	
-	init(latitude: Double, longitude: Double, timeInterval: TimeInterval, pointType: Int32, idCode: String?)
+	init(latitude: Double, longitude: Double, timeStamp: TimeInterval, pointType: Int32, pointID: String?)
 	{
 		self.latitude = latitude
 		self.longitude = longitude
-		self.timeStamp = timeInterval
+		self.timeStamp = timeStamp
 		
-		if let ptID = idCode
+		if let ptID = pointID
 		{
 			self.pointID = ptID
 		}
 		else
 		{
-			self.pointID = self.id!.uuidString
+			self.pointID = UUID().uuidString
 		}
-
-		self.isRoutePoint = false
-		self.isModelLocation = false
-		self.isVenueLocation = false
 		
 		// Now set the point type
 		//
+		self.pointType = pointType
+		
 		switch pointType
 		{
 		case gpsPointType.isVenueLocation.rawValue:
@@ -73,7 +75,6 @@ final class GpsPoint: Codable
 		default:
 			break
 		}
-		
 	}
 }
 

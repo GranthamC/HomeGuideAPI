@@ -2,14 +2,14 @@ import Foundation
 import Vapor
 import FluentPostgreSQL
 
-final class VenueModel: Codable
+final class HomeSetModel: Codable
 {
 	var id: UUID?
 	
+	var homeSetModelID: Int32
+	var homeSetID: Int32
 	var venueModelID: Int32
-	var venueID: Int32
-	var modelID: Int32
-	
+
     var arImageID: Int32?
 	
 	var exteriorImageID: Int32?
@@ -23,23 +23,21 @@ final class VenueModel: Codable
 
     var meshModelID: Int32?
     var meshModelURL: String?
-	
-	var isActive: Bool = true
 
 	var changeToken: Int32?
 
-	init(venueModelID: Int32, venueID: Int32, modelID: Int32)
+	init(venueModelID: Int32, homeSetID: Int32, homeSetModelID: Int32)
 	{
 		self.venueModelID = venueModelID
-		self.venueID = venueID
-		self.modelID = modelID
+		self.homeSetID = homeSetID
+		self.homeSetModelID = homeSetModelID
 	}
 }
 
 
-extension VenueModel: PostgreSQLUUIDModel {}
+extension HomeSetModel: PostgreSQLUUIDModel {}
 
-extension VenueModel: Migration
+extension HomeSetModel: Migration
 {
 	static func prepare(on connection: PostgreSQLConnection) -> Future<Void>
 	{
@@ -52,14 +50,15 @@ extension VenueModel: Migration
 	}
 }
 
-extension VenueModel: Content {}
+extension HomeSetModel: Content {}
 
-extension VenueModel: Parameter {}
+extension HomeSetModel: Parameter {}
 
-extension VenueModel
+extension HomeSetModel
 {
 
 }
+
 
 
 

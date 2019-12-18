@@ -13,6 +13,9 @@ final class DbAdmin: Codable
 	var username: String
 	var password: String
 	
+	var venueManager: Bool?
+	var managedVenueID: Int32?
+	
 	var superUser: Bool?
 	var adminUser: Bool?
 	
@@ -103,18 +106,22 @@ struct AdminUser: Migration
 	
 	static func prepare(on connection: PostgreSQLConnection) -> Future<Void>
 	{
-		//		let adminName = Environment.get("MCH_ADMIN_USER")
-		//
-		//		let adminPassword = Environment.get("MCH_ADMIN_PASSWORD")
-		
-		let password = try? BCrypt.hash(adminPassword!)
-		
-		guard let hashedPassword = password else
+		guard let adminName = Environment.get("HGD_ADMIN_USER") else
 		{
-			fatalError("Failed to create admin user: username: \(adminName ?? "")     password:\(adminPassword ?? "")")
+			fatalError("Failed to load initial username!")
+		}
+
+		guard let adminPassword = Environment.get("HGD_ADMIN_PASSWORD") else
+		{
+			fatalError("Failed to load initial user password!")
 		}
 		
-		let user = DbAdmin(name: "Admin", username: adminName!, password: hashedPassword)
+		guard let hashedPassword = try? BCrypt.hash(adminPassword) else
+		{
+			fatalError("Failed to create hash password: \(adminName)     password:\(adminPassword)")
+		}
+				
+		let user = DbAdmin(name: "Admin", username: adminName, password: hashedPassword)
 		
 		user.superUser = true
 		user.adminUser = true

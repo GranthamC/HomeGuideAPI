@@ -2,13 +2,14 @@ import Foundation
 import Vapor
 import FluentPostgreSQL
 
-final class HomeVenue: Codable
+final class Plant: Codable
 {
 	var id: UUID?
 	
-	var venueID: Int32
-	var venueName: String
-	
+    var plantID: Int32
+    var plantName: String
+    var plantNumber: Int16
+
     var logoImageID: Int32?
 	
     var streetAddress: String?
@@ -20,18 +21,19 @@ final class HomeVenue: Codable
 	
 	var changeToken: Int32?
 
-	init(venueName: String, venueID: Int32)
+
+	init(plantID: Int32, plantName: String, plantNumber: Int16)
 	{
-		self.venueName = venueName
-		
-		self.venueID = venueID
+		self.plantID = plantID
+		self.plantName = plantName
+		self.plantNumber = plantNumber
 	}
 }
 
 
-extension HomeVenue: PostgreSQLUUIDModel {}
+extension Plant: PostgreSQLUUIDModel {}
 
-extension HomeVenue: Migration
+extension Plant: Migration
 {
 	static func prepare(on connection: PostgreSQLConnection) -> Future<Void>
 	{
@@ -39,23 +41,22 @@ extension HomeVenue: Migration
 			
 			try addProperties(to: builder)
 			
-//			builder.unique(on: \.venueID)
+//			builder.unique(on: \.modelNumber)
 		}
 	}
 }
 
-extension HomeVenue: Content {}
+extension Plant: Content {}
 
-extension HomeVenue: Parameter {}
+extension Plant: Parameter {}
 
-extension HomeVenue
+extension Plant
 {
-	var gpsLocation: Children<HomeVenue, GpsPoint> {
-		
-		return children(\.homeVenueID)
-	}
 
 }
+
+
+
 
 
 

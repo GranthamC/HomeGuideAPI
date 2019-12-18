@@ -3,9 +3,6 @@ import Vapor
 import Leaf
 import Authentication
 
-var adminName: String?
-var adminPassword: String?
-
 
 /// Called before your application initializes.
 public func configure(
@@ -52,11 +49,6 @@ public func configure(
     let databaseName = Environment.get("DATABASE_DB") ?? "vapor"
 	
     let password = Environment.get("DATABASE_PASSWORD") ?? "password"
-	
-	adminName = Environment.get("MCH_ADMIN_USER")  ??  "vapor"
-	
-	adminPassword = Environment.get("MCH_ADMIN_PASSWORD")  ??  "password!"
-	
 
     let databaseConfig = PostgreSQLDatabaseConfig(
         hostname: hostname,
@@ -69,7 +61,7 @@ public func configure(
     databases.add(database: database, as: .psql)
 	
     services.register(databases)
-	
+
     // Configure migrations
 	//
     var migrations = MigrationConfig()
@@ -78,7 +70,42 @@ public func configure(
 	
 	migrations.add(model: Token.self, database: .psql)
 	
+	migrations.add(model: HomeGuideGlobal.self, database: .psql)
+	
+	migrations.add(model: ChangeTokens.self, database: .psql)
+
+	migrations.add(model: HomeImage.self, database: .psql)
+	
+	migrations.add(model: ModelImageNdx.self, database: .psql)
+	
+	migrations.add(model: HomeModel.self, database: .psql)
+	
+	migrations.add(model: Plant.self, database: .psql)
+	
+	migrations.add(model: ProductLine.self, database: .psql)
+	
+	migrations.add(model: Brand.self, database: .psql)
+	
+	migrations.add(model: HomeSet.self, database: .psql)
+	
+	migrations.add(model: HomeSetModel.self, database: .psql)
+	
+	migrations.add(model: HomeVenue.self, database: .psql)
+	
+	migrations.add(model: VenueModel.self, database: .psql)
+	
+	migrations.add(model: VenueModelImage.self, database: .psql)
+	
 	migrations.add(migration: AdminUser.self, database: .psql)
 
     services.register(migrations)
+	
+	
+	// Add command line configuration service
+	//
+	var commandConfig = CommandConfig.default()
+
+	commandConfig.useFluentCommands()
+
+	services.register(commandConfig)
 }

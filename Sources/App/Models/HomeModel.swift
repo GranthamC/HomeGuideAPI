@@ -6,17 +6,53 @@ final class HomeModel: Codable
 {
 	var id: UUID?
 	
-	var brandID: String
-	var brandDescription: String
-	
-	var acronym: String?
-	
-	var changeToken: UInt32?
+    var modelID: Int32
+    var modelNumber: String
+    var modelDescription: String
 
-	init(name: String, idCode: String)
+    var lineID: Int16?
+    var brandID: Int32?
+
+    var arImageID: Int32?
+	
+    var baths: Float?
+    var beds: Int16?
+
+	var exteriorImageID: Int32?
+    var floorplanID: Int32?
+    var heroImageID: Int32?
+	
+    var isModular: Bool?
+    var isMultiSection: Bool?
+    var isWebEnabled: Bool?
+	
+    var matterportTourURL: String?
+	
+    var quickLookFloorplanID: Int32?
+    var quickLookFloorplanURL: String?
+
+    var meshModelID: Int32?
+    var meshModelURL: String?
+	
+    var minSqFt: Int16?
+    var maxSqFt: Int16?
+    var modelWidth: Int16?
+    var modelLength: Int16?
+	
+    var highPrice: Double?
+    var lowPrice: Double?
+	
+    var twoYearsSales: Int16?
+    var wholesalePrice: Double?
+	
+	var changeToken: Int32?
+
+
+	init(modelID: Int32, modelNumber: String, modelDescription: String)
 	{
-		self.brandDescription = name
-		self.brandID = idCode
+		self.modelNumber = modelNumber
+		self.modelID = modelID
+		self.modelDescription = modelDescription
 	}
 }
 
@@ -31,7 +67,7 @@ extension HomeModel: Migration
 			
 			try addProperties(to: builder)
 			
-			//			builder.unique(on: \.plantName)
+			builder.unique(on: \.modelNumber)
 		}
 	}
 }
