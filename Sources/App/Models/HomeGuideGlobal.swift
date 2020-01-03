@@ -6,6 +6,8 @@ final class HomeGuideGlobal: Codable
 {
 	var id: UUID?
 	
+	var appID: String?
+
     var nextARActionID: Int32?
     var nextARImageID: Int32?
     var nextARModelID: Int32?

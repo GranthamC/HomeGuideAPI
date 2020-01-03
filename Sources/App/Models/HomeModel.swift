@@ -27,6 +27,7 @@ final class HomeModel: Codable
     var isWebEnabled: Bool?
 	
     var matterportTourURL: String?
+	var websiteURL:String?
 	
     var quickLookFloorplanID: Int32?
     var quickLookFloorplanURL: String?

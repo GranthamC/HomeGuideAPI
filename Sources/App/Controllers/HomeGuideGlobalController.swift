@@ -14,6 +14,8 @@ struct HomeGuideGlobalController: RouteCollection
 		homeGuideGlobalsRoute.get(use: getAllHandler)
 		
 		homeGuideGlobalsRoute.get(HomeGuideGlobal.parameter, use: getHandler)
+		
+		homeGuideGlobalsRoute.get("appid", String.parameter, use: getFromAppIDHandler)
 
 		
 		// Add-in authentication for creating and updating
@@ -59,6 +61,26 @@ struct HomeGuideGlobalController: RouteCollection
 		return try req.parameters.next(HomeGuideGlobal.self)
 	}
 	
+	
+	func getFromAppIDHandler(_ req: Request) throws -> Future<HomeGuideGlobal>
+	{
+		let appID = try req.parameters.next(String.self)
+		
+		return HomeGuideGlobal.query(on: req).group(.or) { or in
+			or.filter(\.appID == appID)
+		}.first().map(to: HomeGuideGlobal.self) { hgGlobals -> HomeGuideGlobal in
+			
+			if let homeGuideGlobals = hgGlobals
+			{
+				return homeGuideGlobals
+			}
+			else
+			{
+				throw Abort(.notFound)
+			}
+		}
+	}
+
 	
 	func getNextHomeImageID(_ req: Request) throws -> Future<Int32>
 	{

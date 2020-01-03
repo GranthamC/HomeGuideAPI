@@ -68,6 +68,7 @@ struct HomeImageController: RouteCollection
 			homeImage, updatedHomeImage in
 			
 			homeImage.cloudPath = updatedHomeImage.cloudPath
+			homeImage.localPath = updatedHomeImage.localPath
 			homeImage.imageID = updatedHomeImage.imageID
 			homeImage.serverID = updatedHomeImage.serverID
 			

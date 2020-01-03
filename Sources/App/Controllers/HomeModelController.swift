@@ -92,6 +92,7 @@ struct HomeModelController: RouteCollection
 			homeModel.isWebEnabled = updatedHomeModel.isWebEnabled
 			
 			homeModel.matterportTourURL = updatedHomeModel.matterportTourURL
+			homeModel.websiteURL = updatedHomeModel.websiteURL
 			
 			homeModel.arImageID = updatedHomeModel.arImageID
 			homeModel.meshModelID = updatedHomeModel.meshModelID
