@@ -57,7 +57,7 @@ struct ChangeTokensController: RouteCollection
 		
 		tokenAuthGroup.get(ChangeTokens.parameter, "homeset-model", use: getNextHomeSetModelsChangeToken)
 		
-		tokenAuthGroup.get(ChangeTokens.parameter, "brand", use: getNextBrandsChangeToken)
+		tokenAuthGroup.get(ChangeTokens.parameter, "change-token", use: getNextChangeTokenChangeToken)
 
 	}
 	
@@ -100,15 +100,15 @@ struct ChangeTokensController: RouteCollection
 	}
 
 	
-	func getNextBrandsChangeToken(_ req: Request) throws -> Future<Int32>
+	func getNextChangeTokenChangeToken(_ req: Request) throws -> Future<Int32>
 	{
 		let changeTokens = try req.parameters.next(ChangeTokens.self)
 		
 		return changeTokens.map(to: Int32.self) { tokens -> Int32 in
 			
-			tokens.brandChangeToken += 1
+			tokens.changeToken += 1
 			
-			let nextToken = tokens.brandChangeToken
+			let nextToken = tokens.changeToken
 			
 			_ = tokens.save(on: req)
 			
@@ -315,6 +315,36 @@ struct ChangeTokensController: RouteCollection
 			req.content.decode(ChangeTokens.self)
 		) {
 			changeTokens, updatedChangeTokens in
+			
+			changeTokens.appID = updatedChangeTokens.appID
+			changeTokens.appTokensID = updatedChangeTokens.appTokensID
+			
+			changeTokens.brandChangeToken = updatedChangeTokens.brandChangeToken
+			changeTokens.homeImageChangeToken = updatedChangeTokens.homeImageChangeToken
+			changeTokens.homeModelChangeToken = updatedChangeTokens.homeModelChangeToken
+			changeTokens.homeSetCategoryChangeToken = updatedChangeTokens.homeSetCategoryChangeToken
+			
+			changeTokens.homeSetChangeToken = updatedChangeTokens.homeSetChangeToken
+			changeTokens.homeSetModelChangeToken = updatedChangeTokens.homeSetModelChangeToken
+			changeTokens.homeVenueChangeToken = updatedChangeTokens.homeVenueChangeToken
+			
+			changeTokens.lineOptionChangeToken = updatedChangeTokens.lineOptionChangeToken
+			changeTokens.modelImageChangeToken = updatedChangeTokens.modelImageChangeToken
+			changeTokens.modelOptionChangeToken = updatedChangeTokens.modelOptionChangeToken
+			changeTokens.modelOptionImageChangeToken = updatedChangeTokens.modelOptionImageChangeToken
+			
+			changeTokens.optionGroupChangeToken = updatedChangeTokens.optionGroupChangeToken
+			changeTokens.optionImageChangeToken = updatedChangeTokens.optionImageChangeToken
+			changeTokens.optionImageNdxChangeToken = updatedChangeTokens.optionImageNdxChangeToken
+			changeTokens.optionItemChangeToken = updatedChangeTokens.optionItemChangeToken
+			
+			changeTokens.plantChangeToken = updatedChangeTokens.plantChangeToken
+			changeTokens.productLineChangeToken = updatedChangeTokens.productLineChangeToken
+			changeTokens.quickLookFloorplanChangeToken = updatedChangeTokens.quickLookFloorplanChangeToken
+			
+			changeTokens.quickLookNodeChangeToken = updatedChangeTokens.quickLookNodeChangeToken
+			changeTokens.venueModelChangeToken = updatedChangeTokens.venueModelChangeToken
+			changeTokens.changeToken = updatedChangeTokens.changeToken
 			
 			changeTokens.lastUpdatedBy = updatedChangeTokens.lastUpdatedBy
 
