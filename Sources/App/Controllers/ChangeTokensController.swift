@@ -125,6 +125,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.homeSetModelChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.homeSetModelChangeToken
 			
 			_ = tokens.save(on: req)
@@ -142,6 +146,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.homeSetChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.homeSetChangeToken
 			
 			_ = tokens.save(on: req)
@@ -159,6 +167,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.venueModelChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.venueModelChangeToken
 			
 			_ = tokens.save(on: req)
@@ -176,6 +188,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.homeVenueChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.homeVenueChangeToken
 			
 			_ = tokens.save(on: req)
@@ -193,6 +209,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.productLineChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.productLineChangeToken
 			
 			_ = tokens.save(on: req)
@@ -210,6 +230,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.plantChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.plantChangeToken
 			
 			_ = tokens.save(on: req)
@@ -226,6 +250,10 @@ struct ChangeTokensController: RouteCollection
 		return changeTokens.map(to: Int32.self) { tokens -> Int32 in
 			
 			tokens.homeImageChangeToken += 1
+			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
 			
 			let nextToken = tokens.homeImageChangeToken
 			
@@ -244,6 +272,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.modelImageChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.modelImageChangeToken
 			
 			_ = tokens.save(on: req)
@@ -261,6 +293,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.homeModelChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.homeModelChangeToken
 			
 			_ = tokens.save(on: req)
@@ -278,6 +314,10 @@ struct ChangeTokensController: RouteCollection
 			
 			tokens.optionImageChangeToken += 1
 			
+			// Show we've updated a change token
+			//
+			tokens.changeToken += 1
+
 			let nextToken = tokens.optionImageChangeToken
 			
 			_ = tokens.save(on: req)
