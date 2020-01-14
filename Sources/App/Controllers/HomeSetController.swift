@@ -17,7 +17,9 @@ struct HomeSetController: RouteCollection
 		
 		homeSetsRoute.get("homesetid", Int32.parameter, use: getHomeSetHandler)
 		
-		homeSetsRoute.get("homeset-models", Int32.parameter, use: getHomeSetsForVenueHandler)
+		homeSetsRoute.get("venueid", Int32.parameter, use: getHomeSetsForVenueHandler)
+
+		homeSetsRoute.get("homeset-models", Int32.parameter, use: getHomeSetsModels)
 
 		homeSetsRoute.get("search", use: searchHandler)
 
@@ -136,7 +138,20 @@ struct HomeSetController: RouteCollection
 	
 	// Find all models associated with the passed homeSetID
 	//
-	func getHomeSetsForVenueHandler(_ req: Request) throws -> Future<[HomeSetModel]>
+	func getHomeSetsForVenueHandler(_ req: Request) throws -> Future<[HomeSet]>
+	{
+		let venueID = try req.parameters.next(Int32.self)
+		
+		return HomeSet.query(on: req).group(.or) { or in
+			or.filter(\.venueID == venueID)
+		}.all()
+
+	}
+
+	
+	// Find all models associated with the passed homeSetID
+	//
+	func getHomeSetsModels(_ req: Request) throws -> Future<[HomeSetModel]>
 	{
 		let homeSetID = try req.parameters.next(Int32.self)
 		
