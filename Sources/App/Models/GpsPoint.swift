@@ -16,6 +16,8 @@ enum gpsPointType: Int32 {
 
 final class GpsPoint: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
 	var pointID:  String?

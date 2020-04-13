@@ -26,6 +26,9 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 
+## Heroku local debug environment variables
+.env
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa

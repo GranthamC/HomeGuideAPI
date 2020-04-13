@@ -11,6 +11,8 @@ import FluentPostgreSQL
 import Authentication
 
 final class Token: Codable {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	var token: String
 	var userID: DbAdmin.ID

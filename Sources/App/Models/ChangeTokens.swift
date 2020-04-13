@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class ChangeTokens: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
     var appID: String

@@ -6,6 +6,8 @@ import Authentication
 
 final class HomeImage: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
     var cloudPath: String

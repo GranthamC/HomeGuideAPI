@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class Brand: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
     var acronym: String?

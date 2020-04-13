@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class ModelImageNdx: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
     var caption: String?

@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class Plant: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
     var plantID: Int32

@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class HomeGuideGlobal: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
 	var appID: String?

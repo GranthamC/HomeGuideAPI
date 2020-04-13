@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class ProductLine: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
 	var lineID: Int32

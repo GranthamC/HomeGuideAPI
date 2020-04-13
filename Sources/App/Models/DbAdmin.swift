@@ -7,6 +7,8 @@ import Authentication
 
 final class DbAdmin: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
 	var name: String

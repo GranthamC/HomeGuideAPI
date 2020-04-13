@@ -4,6 +4,8 @@ import FluentPostgreSQL
 
 final class HomeVenue: Codable
 {
+	typealias Database = PostgreSQLDatabase
+	
 	var id: UUID?
 	
 	var venueID: Int32
